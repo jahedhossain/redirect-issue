@@ -19,7 +19,7 @@ export default function Home() {
 
   const redirectUrl2 = () => {
     try {
-      window.location.href = 'https://www.google.com';
+      window.location.href = 'x-safari://' + window.location.href;
     } catch (error) {
       setErrorMessage(String(error));
     }
@@ -33,14 +33,25 @@ export default function Home() {
     }
   };
 
+  const redirectUrl4 = () => {
+    try {
+      //google chrome
+      window.location.href = 'googlechrome://' + window.location.href;
+    } catch (error) {
+      setErrorMessage(String(error));
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-sans">
+    <div className="">
       <h1>
         <button onClick={redirectUrl}>On Click 1</button> <br />
         <br />
         <button onClick={redirectUrl2}>On Click 2</button>
         <br /> <br />
         <button onClick={redirectUrl3}>On Click 3</button>
+        <br /> <br />
+        <button onClick={redirectUrl4}>On Click google</button>
         <br /> <br />
         {errorMessage && <p>{JSON.stringify(errorMessage, null, 2)}</p>}
         {userAgent && (
