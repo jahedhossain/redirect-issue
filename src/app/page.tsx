@@ -1,8 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [userAgent, setUserAgent] = useState<string | null>(null);
+
+  useEffect(() => {
+    setUserAgent(navigator.userAgent);
+  }, []);
 
   const redirectUrl = () => {
     try {
@@ -28,7 +33,6 @@ export default function Home() {
     }
   };
 
-  const userAgent = navigator.userAgent;
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-sans">
       <h1>
@@ -39,7 +43,7 @@ export default function Home() {
         <button onClick={redirectUrl3}>On Click 3</button>
         <br /> <br />
         {errorMessage && <p>{JSON.stringify(errorMessage, null, 2)}</p>}
-        {
+        {userAgent && (
           <p
             onClick={() => {
               navigator.clipboard.writeText(userAgent);
@@ -48,7 +52,7 @@ export default function Home() {
           >
             User Agent: <code>{userAgent}</code>
           </p>
-        }
+        )}
       </h1>
     </div>
   );
